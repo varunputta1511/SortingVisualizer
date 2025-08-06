@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Visualizer - Landing Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #e8f4fd, #dbeafe, #f0f9ff);
+      color: #1e3a8a;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 0;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #64748b;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 80px;
+    }
+
+    .landing-btn {
+      padding: 16px 32px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .landing-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+    }
+
+    .landing-btn.outline {
+      background: transparent;
+      border: 2px solid #3b82f6;
+      color: #3b82f6;
+    }
+
+    .landing-btn.outline:hover {
+      background: #3b82f6;
+      color: white;
+    }
+
+    /* Features Section */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 32px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px rgba(59, 130, 246, 0.2);
+    }
+
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 24px;
+    }
+
+    /* Algorithm Sections */
+    .algorithm-section {
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1e40af;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 40px;
+      font-size: 1.125rem;
+    }
+
+    .algorithm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .algorithm-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .algorithm-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
+    }
+
+    .algorithm-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1e40af;
+    }
+
+    .algorithm-card p {
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+
+    .complexity-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .complexity-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .complexity-label {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    .complexity-value {
+      background: #f1f5f9;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 0.875rem;
+      color: #1e40af;
+    }
+
+    .difficulty-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .difficulty-easy { background: #dcfce7; color: #166534; }
+    .difficulty-medium { background: #fef3c7; color: #92400e; }
+    .difficulty-hard { background: #fecaca; color: #991b1b; }
+
+    /* Tabs */
+    .tabs {
+      margin-top: 32px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 24px;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 8px;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 12px 16px;
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      color: #64748b;
+    }
+
+    .tab-button.active {
+      background: white;
+      color: #1e40af;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .code-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 24px;
+    }
+
+    .code-block {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .code-header {
+      padding: 16px 20px;
+      color: white;
+      font-weight: 600;
+      display: flex;
+      justify-content: between;
+      align-items: center;
+    }
+
+    .code-header.cpp { background: #2563eb; }
+    .code-header.java { background: #ea580c; }
+
+    .code-language {
+      font-size: 0.75rem;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .code-content {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 20px;
+      overflow-x: auto;
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    /* CTA Section */
+    .cta {
+      background: white;
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1e40af;
+    }
+
+    .cta p {
+      color: #64748b;
+      margin-bottom: 32px;
+      font-size: 1.125rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .landing-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .code-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tab-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Algorithm Visualizer</h1>
+      <p>Interactive platform to visualize and understand sorting and pathfinding algorithms with detailed code implementations in C++ and Java.</p>
+      
+      <div class="button-container">
+        <a href="pathfinding.html" class="landing-btn">
+          ⚡ Pathfinding Visualizer →
+        </a>
+        <a href="sorting.html" class="landing-btn outline">
+          💻 Sorting Visualizer →
+        </a>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Interactive Visualization</h3>
+        <p>Watch algorithms come to life with step-by-step animated visualizations</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">💻</div>
+        <h3>Code Implementation</h3>
+        <p>Complete C++ and Java implementations for every algorithm</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>Educational Content</h3>
+        <p>Detailed explanations, complexity analysis, and learning resources</p>
+      </div>
+    </div>
+
+    <!-- Sorting Algorithms Section -->
+    <div class="algorithm-section">
+      <h2 class="section-title">Sorting Algorithms</h2>
+      <p class="section-subtitle">Master the fundamental sorting techniques with visual demonstrations</p>
+      
+      <div class="algorithm-grid">
+        <div class="algorithm-card">
+          <span class="difficulty-badge difficulty-easy">Easy</span>
+          <h3>Bubble Sort</h3>
+          <p>Simple comparison-based algorithm that repeatedly steps through the list.</p>
+          <div class="complexity-info">
+            <div class="complexity-row">
+              <span class="complexity-label">Time:</span>
+              <span class="complexity-value">O(n²)</span>
+            </div>
+            <div class="complexity-row">
+              <span class="complexity-label">Space:</span>
+              <span class="complexity-value">O(1)</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="algorithm-card">
+          <span class="difficulty-badge difficulty-medium">Medium</span>
+          <h3>Quick Sort</h3>
+          <p>Efficient divide-and-conquer algorithm that uses a pivot element.</p>
+          <div class="complexity-info">
+            <div class="complexity-row">
+              <span class="complexity-label">Time:</span>
+              <span class="complexity-value">O(n log n)</span>
+            </div>
+            <div class="complexity-row">
+              <span class="complexity-label">Space:</span>
+              <span class="complexity-value">O(log n)</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="algorithm-card">
+          <span class="difficulty-badge difficulty-medium">Medium</span>
+          <h3>Merge Sort</h3>
+          <p>Stable divide-and-conquer algorithm that guarantees O(n log n) performance.</p>
+          <div class="complexity-info">
+            <div class="complexity-row">
+              <span class="complexity-label">Time:</span>
+              <span class="complexity-value">O(n log n)</span>
+            </div>
+            <div class="complexity-row">
+              <span class="complexity-label">Space:</span>
+              <span class="complexity-value">O(n)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sorting Code Tabs -->
+      <div class="tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" onclick="showTab('bubble-sort')">Bubble Sort</button>
+          <button class="tab-button" onclick="showTab('quick-sort')">Quick Sort</button>
+          <button class="tab-button" onclick="showTab('merge-sort')">Merge Sort</button>
+        </div>
+        
+        <div id="bubble-sort" class="tab-content active">
+          <div class="code-grid">
+            <div class="code-block">
+              <div class="code-header cpp">
+                <span>Bubble Sort Implementation</span>
+                <span class="code-language">C++</span>
+              </div>
+              <div class="code-content">
+<pre>void bubbleSort(vector&lt;int&gt;&amp; arr) {
+    int n = arr.size();
+    for (int i = 0; i &lt; n-1; i++) {
+        for (int j = 0; j &lt; n-i-1; j++) {
+            if (arr[j] &gt; arr[j+1]) {
+                swap(arr[j], arr[j+1]);
+            }
+        }
+    }
+}</pre>
+              </div>
+            </div>
+            
+            <div class="code-block">
+              <div class="code-header java">
+                <span>Bubble Sort Implementation</span>
+                <span class="code-language">Java</span>
+              </div>
+              <div class="code-content">
+<pre>public static void bubbleSort(int[] arr) {
+    int n = arr.length;
+    for (int i = 0; i &lt; n-1; i++) {
+        for (int j = 0; j &lt; n-i-1; j++) {
+            if (arr[j] &gt; arr[j+1]) {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="quick-sort" class="tab-content">
+          <div class="code-grid">
+            <div class="code-block">
+              <div class="code-header cpp">
+                <span>Quick Sort Implementation</span>
+                <span class="code-language">C++</span>
+              </div>
+              <div class="code-content">
+<pre>int partition(vector&lt;int&gt;&amp; arr, int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+    
+    for (int j = low; j &lt;= high - 1; j++) {
+        if (arr[j] &lt; pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+void quickSort(vector&lt;int&gt;&amp; arr, int low, int high) {
+    if (low &lt; high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}</pre>
+              </div>
+            </div>
+            
+            <div class="code-block">
+              <div class="code-header java">
+                <span>Quick Sort Implementation</span>
+                <span class="code-language">Java</span>
+              </div>
+              <div class="code-content">
+<pre>public static int partition(int[] arr, int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+    
+    for (int j = low; j &lt;= high - 1; j++) {
+        if (arr[j] &lt; pivot) {
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return (i + 1);
+}
+
+public static void quickSort(int[] arr, int low, int high) {
+    if (low &lt; high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="merge-sort" class="tab-content">
+          <div class="code-grid">
+            <div class="code-block">
+              <div class="code-header cpp">
+                <span>Merge Sort Implementation</span>
+                <span class="code-language">C++</span>
+              </div>
+              <div class="code-content">
+<pre>void merge(vector&lt;int&gt;&amp; arr, int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
+    
+    vector&lt;int&gt; L(n1), R(n2);
+    
+    for (int i = 0; i &lt; n1; i++)
+        L[i] = arr[l + i];
+    for (int j = 0; j &lt; n2; j++)
+        R[j] = arr[m + 1 + j];
+    
+    int i = 0, j = 0, k = l;
+    
+    while (i &lt; n1 &amp;&amp; j &lt; n2) {
+        if (L[i] &lt;= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    
+    while (i &lt; n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+    
+    while (j &lt; n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+void mergeSort(vector&lt;int&gt;&amp; arr, int l, int r) {
+    if (l &lt; r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}</pre>
+              </div>
+            </div>
+            
+            <div class="code-block">
+              <div class="code-header java">
+                <span>Merge Sort Implementation</span>
+                <span class="code-language">Java</span>
+              </div>
+              <div class="code-content">
+<pre>public static void merge(int[] arr, int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
+    
+    int[] L = new int[n1];
+    int[] R = new int[n2];
+    
+    for (int i = 0; i &lt; n1; ++i)
+        L[i] = arr[l + i];
+    for (int j = 0; j &lt; n2; ++j)
+        R[j] = arr[m + 1 + j];
+    
+    int i = 0, j = 0, k = l;
+    
+    while (i &lt; n1 &amp;&amp; j &lt; n2) {
+        if (L[i] &lt;= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    
+    while (i &lt; n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+    
+    while (j &lt; n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+public static void mergeSort(int[] arr, int l, int r) {
+    if (l &lt; r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pathfinding Algorithms Section -->
+    <div class="algorithm-section">
+      <h2 class="section-title">Pathfinding Algorithms</h2>
+      <p class="section-subtitle">Explore graph traversal and shortest path algorithms</p>
+      
+      <div class="algorithm-grid">
+        <div class="algorithm-card">
+          <span class="difficulty-badge difficulty-medium">Medium</span>
+          <h3>Dijkstra's Algorithm</h3>
+          <p>Finds shortest path between nodes in a weighted graph.</p>
+          <div class="complexity-info">
+            <div class="complexity-row">
+              <span class="complexity-label">Time:</span>
+              <span class="complexity-value">O(V²)</span>
+            </div>
+            <div class="complexity-row">
+              <span class="complexity-label">Space:</span>
+              <span class="complexity-value">O(V)</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="algorithm-card">
+          <span class="difficulty-badge difficulty-hard">Hard</span>
+          <h3>A* Search</h3>
+          <p>Best-first search algorithm that uses heuristics for optimal pathfinding.</p>
+          <div class="complexity-info">
+            <div class="complexity-row">
+              <span class="complexity-label">Time:</span>
+              <span class="complexity-value">O(b^d)</span>
+            </div>
+            <div class="complexity-row">
+              <span class="complexity-label">Space:</span>
+              <span class="complexity-value">O(b^d)</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="algorithm-card">
+          <span class="difficulty-badge difficulty-easy">Easy</span>
+          <h3>Breadth-First Search</h3>
+          <p>Explores neighbor nodes first before moving to the next depth level.</p>
+          <div class="complexity-info">
+            <div class="complexity-row">
+              <span class="complexity-label">Time:</span>
+              <span class="complexity-value">O(V + E)</span>
+            </div>
+            <div class="complexity-row">
+              <span class="complexity-label">Space:</span>
+              <span class="complexity-value">O(V)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pathfinding Code Tabs -->
+      <div class="tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" onclick="showTab('dijkstra')">Dijkstra</button>
+          <button class="tab-button" onclick="showTab('astar')">A* Search</button>
+          <button class="tab-button" onclick="showTab('bfs')">BFS</button>
+        </div>
+        
+        <div id="dijkstra" class="tab-content active">
+          <div class="code-grid">
+            <div class="code-block">
+              <div class="code-header cpp">
+                <span>Dijkstra's Algorithm</span>
+                <span class="code-language">C++</span>
+              </div>
+              <div class="code-content">
+<pre>#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;climits&gt;
+using namespace std;
+
+vector&lt;int&gt; dijkstra(vector&lt;vector&lt;pair&lt;int,int&gt;&gt;&gt;&amp; graph, int src) {
+    int V = graph.size();
+    vector&lt;int&gt; dist(V, INT_MAX);
+    priority_queue&lt;pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, greater&lt;pair&lt;int,int&gt;&gt;&gt; pq;
+    
+    dist[src] = 0;
+    pq.push({0, src});
+    
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+        
+        for (auto&amp; edge : graph[u]) {
+            int v = edge.first;
+            int weight = edge.second;
+            
+            if (dist[u] + weight &lt; dist[v]) {
+                dist[v] = dist[u] + weight;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+    
+    return dist;
+}</pre>
+              </div>
+            </div>
+            
+            <div class="code-block">
+              <div class="code-header java">
+                <span>Dijkstra's Algorithm</span>
+                <span class="code-language">Java</span>
+              </div>
+              <div class="code-content">
+<pre>import java.util.*;
+
+public static int[] dijkstra(List&lt;List&lt;int[]&gt;&gt; graph, int src) {
+    int V = graph.size();
+    int[] dist = new int[V];
+    Arrays.fill(dist, Integer.MAX_VALUE);
+    
+    PriorityQueue&lt;int[]&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; a[0] - b[0]);
+    
+    dist[src] = 0;
+    pq.offer(new int[]{0, src});
+    
+    while (!pq.isEmpty()) {
+        int[] curr = pq.poll();
+        int u = curr[1];
+        
+        for (int[] edge : graph.get(u)) {
+            int v = edge[0];
+            int weight = edge[1];
+            
+            if (dist[u] + weight &lt; dist[v]) {
+                dist[v] = dist[u] + weight;
+                pq.offer(new int[]{dist[v], v});
+            }
+        }
+    }
+    
+    return dist;
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="astar" class="tab-content">
+          <div class="code-grid">
+            <div class="code-block">
+              <div class="code-header cpp">
+                <span>A* Search Algorithm</span>
+                <span class="code-language">C++</span>
+              </div>
+              <div class="code-content">
+<pre>#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+struct Node {
+    int x, y;
+    double f, g, h;
+    Node* parent;
+    
+    Node(int x, int y) : x(x), y(y), f(0), g(0), h(0), parent(nullptr) {}
+};
+
+double heuristic(Node* a, Node* b) {
+    return sqrt(pow(a-&gt;x - b-&gt;x, 2) + pow(a-&gt;y - b-&gt;y, 2));
+}
+
+vector&lt;Node*&gt; aStar(vector&lt;vector&lt;int&gt;&gt;&amp; grid, Node* start, Node* goal) {
+    vector&lt;Node*&gt; openSet;
+    vector&lt;Node*&gt; closedSet;
+    
+    start-&gt;g = 0;
+    start-&gt;h = heuristic(start, goal);
+    start-&gt;f = start-&gt;g + start-&gt;h;
+    
+    openSet.push_back(start);
+    
+    while (!openSet.empty()) {
+        Node* current = openSet[0];
+        int currentIndex = 0;
+        
+        for (int i = 1; i &lt; openSet.size(); i++) {
+            if (openSet[i]-&gt;f &lt; current-&gt;f) {
+                current = openSet[i];
+                currentIndex = i;
+            }
+        }
+        
+        openSet.erase(openSet.begin() + currentIndex);
+        closedSet.push_back(current);
+        
+        if (current-&gt;x == goal-&gt;x &amp;&amp; current-&gt;y == goal-&gt;y) {
+            vector&lt;Node*&gt; path;
+            Node* temp = current;
+            while (temp != nullptr) {
+                path.push_back(temp);
+                temp = temp-&gt;parent;
+            }
+            return path;
+        }
+        
+        // Check neighbors and add to open set
+        // ... (neighbor checking logic)
+    }
+    
+    return vector&lt;Node*&gt;(); // No path found
+}</pre>
+              </div>
+            </div>
+            
+            <div class="code-block">
+              <div class="code-header java">
+                <span>A* Search Algorithm</span>
+                <span class="code-language">Java</span>
+              </div>
+              <div class="code-content">
+<pre>import java.util.*;
+
+class Node {
+    int x, y;
+    double f, g, h;
+    Node parent;
+    
+    public Node(int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.f = this.g = this.h = 0;
+        this.parent = null;
+    }
+}
+
+public static double heuristic(Node a, Node b) {
+    return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+}
+
+public static List&lt;Node&gt; aStar(int[][] grid, Node start, Node goal) {
+    List&lt;Node&gt; openSet = new ArrayList&lt;&gt;();
+    List&lt;Node&gt; closedSet = new ArrayList&lt;&gt;();
+    
+    start.g = 0;
+    start.h = heuristic(start, goal);
+    start.f = start.g + start.h;
+    
+    openSet.add(start);
+    
+    while (!openSet.isEmpty()) {
+        Node current = openSet.get(0);
+        int currentIndex = 0;
+        
+        for (int i = 1; i &lt; openSet.size(); i++) {
+            if (openSet.get(i).f &lt; current.f) {
+                current = openSet.get(i);
+                currentIndex = i;
+            }
+        }
+        
+        openSet.remove(currentIndex);
+        closedSet.add(current);
+        
+        if (current.x == goal.x &amp;&amp; current.y == goal.y) {
+            List&lt;Node&gt; path = new ArrayList&lt;&gt;();
+            Node temp = current;
+            while (temp != null) {
+                path.add(temp);
+                temp = temp.parent;
+            }
+            return path;
+        }
+        
+        // Check neighbors and add to open set
+        // ... (neighbor checking logic)
+    }
+    
+    return new ArrayList&lt;&gt;(); // No path found
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="bfs" class="tab-content">
+          <div class="code-grid">
+            <div class="code-block">
+              <div class="code-header cpp">
+                <span>Breadth-First Search</span>
+                <span class="code-language">C++</span>
+              </div>
+              <div class="code-content">
+<pre>#include &lt;vector&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+vector&lt;vector&lt;int&gt;&gt; bfs(vector&lt;vector&lt;int&gt;&gt;&amp; grid, pair&lt;int,int&gt; start, pair&lt;int,int&gt; goal) {
+    int rows = grid.size();
+    int cols = grid[0].size();
+    
+    vector&lt;vector&lt;bool&gt;&gt; visited(rows, vector&lt;bool&gt;(cols, false));
+    vector&lt;vector&lt;int&gt;&gt; parent(rows, vector&lt;int&gt;(cols, -1));
+    
+    queue&lt;pair&lt;int,int&gt;&gt; q;
+    q.push(start);
+    visited[start.first][start.second] = true;
+    
+    vector&lt;pair&lt;int,int&gt;&gt; directions = {{0,1}, {1,0}, {0,-1}, {-1,0}};
+    
+    while (!q.empty()) {
+        auto current = q.front();
+        q.pop();
+        
+        if (current == goal) {
+            break;
+        }
+        
+        for (auto&amp; dir : directions) {
+            int newX = current.first + dir.first;
+            int newY = current.second + dir.second;
+            
+            if (newX &gt;= 0 &amp;&amp; newX &lt; rows &amp;&amp; newY &gt;= 0 &amp;&amp; newY &lt; cols &amp;&amp; 
+                !visited[newX][newY] &amp;&amp; grid[newX][newY] == 0) {
+                
+                visited[newX][newY] = true;
+                parent[newX][newY] = current.first * cols + current.second;
+                q.push({newX, newY});
+            }
+        }
+    }
+    
+    return parent;
+}</pre>
+              </div>
+            </div>
+            
+            <div class="code-block">
+              <div class="code-header java">
+                <span>Breadth-First Search</span>
+                <span class="code-language">Java</span>
+              </div>
+              <div class="code-content">
+<pre>import java.util.*;
+
+public static int[][] bfs(int[][] grid, int[] start, int[] goal) {
+    int rows = grid.length;
+    int cols = grid[0].length;
+    
+    boolean[][] visited = new boolean[rows][cols];
+    int[][] parent = new int[rows][cols];
+    
+    for (int i = 0; i &lt; rows; i++) {
+        Arrays.fill(parent[i], -1);
+    }
+    
+    Queue&lt;int[]&gt; queue = new LinkedList&lt;&gt;();
+    queue.offer(start);
+    visited[start[0]][start[1]] = true;
+    
+    int[][] directions = {{0,1}, {1,0}, {0,-1}, {-1,0}};
+    
+    while (!queue.isEmpty()) {
+        int[] current = queue.poll();
+        
+        if (Arrays.equals(current, goal)) {
+            break;
+        }
+        
+        for (int[] dir : directions) {
+            int newX = current[0] + dir[0];
+            int newY = current[1] + dir[1];
+            
+            if (newX &gt;= 0 &amp;&amp; newX &lt; rows &amp;&amp; newY &gt;= 0 &amp;&amp; newY &lt; cols &amp;&amp; 
+                !visited[newX][newY] &amp;&amp; grid[newX][newY] == 0) {
+                
+                visited[newX][newY] = true;
+                parent[newX][newY] = current[0] * cols + current[1];
+                queue.offer(new int[]{newX, newY});
+            }
+        }
+    }
+    
+    return parent;
+}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta">
+      <h2>Ready to Start Learning?</h2>
+      <p>Choose your adventure and dive into the world of algorithms</p>
+      <div class="button-container">
+        <a href="pathfinding.html" class="landing-btn">Start with Pathfinding</a>
+        <a href="sorting.html" class="landing-btn outline">Explore Sorting</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      // Hide all tab contents
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Remove active class from all buttons
+      const tabButtons = document.querySelectorAll('.tab-button');
+      tabButtons.forEach(button => {
+        button.classList.remove('active');
+      });
+      
+      // Show selected tab content
+      document.getElementById(tabId).classList.add('active');
+      
+      // Add active class to clicked button
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
