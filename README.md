@@ -3,7 +3,7 @@
 This project is a web application for visualizing various pathfinding algorithms such as Breadth First Search, Depth First Search, A Star, Dijkstra, and Greedy Best First Search. It allows users to select a start and end tile, add walls to the tile map, and visualize how the pathfinding algorithms find the shortest path from start to end. Users can also create random mazes using depth first search backtracking and set random tilemaps with varying ratios of walls to open tiles.
 
 ## How to use
-Follow the link: https://btschneid.github.io/Pathfinding-and-Sorting-Visualizer/index.html
+Follow the link: 
 
 1. Select a start tile by clicking on a tile and then selecting the green button in the tile button container.
 2. Select an end tile by clicking on a tile and then selecting the red button in the tile button container.
@@ -55,7 +55,7 @@ Greedy Best First Search is a heuristic search algorithm that prioritizes explor
 This project is a web application for visualizing various sorting algorithms such as Linear, Bubble, Selection, Insertion, Merge, Quick, Heap, and Bogo. It allows users to change the number of bars to sort and the sorting speed, and then visualize how the algorithms sort the bars.
 
 ## How to use
-Follow the link: https://btschneid.github.io/Pathfinding-and-Sorting-Visualizer/sorting.html OR click the Pathfinding Visualizer button on the bottom right of the Pathfinding Visualizer page
+Follow the link:  OR click the Pathfinding Visualizer button on the bottom right of the Pathfinding Visualizer page
 
 1. Change the number of bars to sort using the slider.
 2. Change the sorting speed using the speed slider.
